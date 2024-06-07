@@ -9,6 +9,7 @@ typedef struct Rectangle {
 
 int main() {
     
+    //----- Stack ------
     //Declare and initialize Rectangle on the stack
     struct Rectangle r = { 10, 5 };
 
@@ -35,7 +36,7 @@ int main() {
     printf("Option C r { %d, %d }\n", r.length, r.height);
 
 
-
+    //----- Heap -----
     //Declare a void pointer
     void *pRectangle;
 
@@ -47,8 +48,9 @@ int main() {
     ((rectangle*)pRectangle)->height = r.height;
 
     printf("heap rectangle { %d, %d }\n", ((rectangle*)pRectangle)->length, ((rectangle*)pRectangle)->height);
-    
 
-      
+    //Release allocated memory
+    free(pRectangle);
+
 
 }
