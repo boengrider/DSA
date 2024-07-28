@@ -1,4 +1,7 @@
 #include <iostream>
+#include <vector>
+#include <string>
+
 using namespace std;
 
 template<class T>
@@ -39,6 +42,11 @@ T Arithmetic<T>::sub() {
     return a - b;
 }
 
+struct Entry {
+    string name;
+    int number;
+
+};
 
 
 
@@ -52,6 +60,27 @@ int main() {
 
     cout << f.add() << endl;
     cout << f.sub() << endl;
+
+    vector<Entry> PhoneBook = {{"Jon Doe", 123},
+                               {"Jane Doe", 456}};
+
+    cout << "Number of entries -> " << PhoneBook.size() << endl;
+
+    cout << "Adding 'Michael J. Scott' to the phone book" << endl;
+
+    PhoneBook.insert(PhoneBook.begin() + PhoneBook.size(), { "Michael J. Scott", 555});
+
+    cout << "Number of entries -> " << PhoneBook.size() << endl;
+
+    cout << "Last entry added -> " << PhoneBook[PhoneBook.size() - 1].name << endl;
+
+    
+
+
+
+    
+
+    
 
     
     
