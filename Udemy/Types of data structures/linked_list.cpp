@@ -1,42 +1,40 @@
-#include <list>
 #include <iostream>
-#include <string>
 
 using namespace std;
 
 
-typedef struct Rectangle {
-    int length;
-    int width;
-} rectangle;
+struct ListEntry {
+    int value;
+    struct ListEntry *next;
+};
 
-int area(rectangle);
 
 int main() {
 
-    const auto allocator = { 1, 2, 3};
+   
+    struct ListEntry last = {30, NULL};
 
-    list<int> myList(allocator);
+    struct ListEntry second = {20, &last};
 
-
-    cout << myList.size() << endl;
-
-    myList.insert(myList.begin(), {4});
+    struct ListEntry head = {10, &second};
 
 
-    for(const auto& item : myList) {
-        cout << item << endl;
+    struct ListEntry *current = &head;
+
+    while(true) {
+        if(current->next == NULL) {
+            printf("Tail node reached. Value %d\n", current->value);
+            break;
+        }
+
+        printf("Linked list element %d\n", current->value);
+        current = current->next;
+
     }
 
-    list<rectangle> rectangles = { {10,20}, {20,10}, {100,200}, {200,100} };
 
 
-    for(const auto& rectangle : rectangles) {
-        cout << "Rectangle area: " << area(rectangle) << endl;
-    }
-    
 }
 
-int area(rectangle r) {
-    return r.length * r.width;
-}
+
+

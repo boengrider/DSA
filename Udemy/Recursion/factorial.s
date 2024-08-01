@@ -1,4 +1,4 @@
-	.file	"Stack_vs_Heap.cpp"
+	.file	"factorial.cpp"
 	.text
 	.local	_ZStL8__ioinit
 	.comm	_ZStL8__ioinit,1,1
@@ -13,50 +13,9 @@ main:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	call	_Z4funAv
-	movl	$0, %eax
-	popq	%rbp
-	.cfi_def_cfa 7, 8
-	ret
-	.cfi_endproc
-.LFE1731:
-	.size	main, .-main
-	.globl	_Z4funAv
-	.type	_Z4funAv, @function
-_Z4funAv:
-.LFB1732:
-	.cfi_startproc
-	endbr64
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
 	subq	$16, %rsp
-	movl	-4(%rbp), %eax
-	movl	%eax, %edi
-	call	_Z4funBi
-	nop
-	leave
-	.cfi_def_cfa 7, 8
-	ret
-	.cfi_endproc
-.LFE1732:
-	.size	_Z4funAv, .-_Z4funAv
-	.globl	_Z4funBi
-	.type	_Z4funBi, @function
-_Z4funBi:
-.LFB1733:
-	.cfi_startproc
-	endbr64
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	subq	$32, %rsp
-	movl	%edi, -20(%rbp)
-	movl	-20(%rbp), %eax
+	movl	$5, %edi
+	call	_Z9factoriali
 	movl	%eax, -4(%rbp)
 	movl	-4(%rbp), %eax
 	movl	%eax, %esi
@@ -67,16 +26,46 @@ _Z4funBi:
 	movq	%rdx, %rsi
 	movq	%rax, %rdi
 	call	_ZNSolsEPFRSoS_E@PLT
-	nop
+	movl	$0, %eax
 	leave
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE1733:
-	.size	_Z4funBi, .-_Z4funBi
+.LFE1731:
+	.size	main, .-main
+	.globl	_Z9factoriali
+	.type	_Z9factoriali, @function
+_Z9factoriali:
+.LFB1732:
+	.cfi_startproc
+	endbr64
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	subq	$16, %rsp
+	movl	%edi, -4(%rbp)
+	cmpl	$1, -4(%rbp)
+	jne	.L4
+	movl	-4(%rbp), %eax
+	jmp	.L5
+.L4:
+	movl	-4(%rbp), %eax
+	subl	$1, %eax
+	movl	%eax, %edi
+	call	_Z9factoriali
+	imull	-4(%rbp), %eax
+.L5:
+	leave
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE1732:
+	.size	_Z9factoriali, .-_Z9factoriali
 	.type	_Z41__static_initialization_and_destruction_0ii, @function
 _Z41__static_initialization_and_destruction_0ii:
-.LFB2233:
+.LFB2232:
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -88,9 +77,9 @@ _Z41__static_initialization_and_destruction_0ii:
 	movl	%edi, -4(%rbp)
 	movl	%esi, -8(%rbp)
 	cmpl	$1, -4(%rbp)
-	jne	.L7
+	jne	.L8
 	cmpl	$65535, -8(%rbp)
-	jne	.L7
+	jne	.L8
 	leaq	_ZStL8__ioinit(%rip), %rax
 	movq	%rax, %rdi
 	call	_ZNSt8ios_base4InitC1Ev@PLT
@@ -101,17 +90,17 @@ _Z41__static_initialization_and_destruction_0ii:
 	movq	_ZNSt8ios_base4InitD1Ev@GOTPCREL(%rip), %rax
 	movq	%rax, %rdi
 	call	__cxa_atexit@PLT
-.L7:
+.L8:
 	nop
 	leave
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE2233:
+.LFE2232:
 	.size	_Z41__static_initialization_and_destruction_0ii, .-_Z41__static_initialization_and_destruction_0ii
 	.type	_GLOBAL__sub_I_main, @function
 _GLOBAL__sub_I_main:
-.LFB2234:
+.LFB2233:
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -126,7 +115,7 @@ _GLOBAL__sub_I_main:
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE2234:
+.LFE2233:
 	.size	_GLOBAL__sub_I_main, .-_GLOBAL__sub_I_main
 	.section	.init_array,"aw"
 	.align 8
