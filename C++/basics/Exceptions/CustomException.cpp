@@ -35,14 +35,15 @@ const char* PersonException::what() const throw() {
     switch (this->errorCode)
     {
     case 1:
-        return "Person age below zero";
+        return "Age beyond limit";
         break;
 
     case 2:
-        return "Person age too high";
+        return "Age below zero";
         break;
     
     default:
+        return "Unknown error";
         break;
     }
 }
@@ -87,4 +88,23 @@ int Person::makeYounger(int _age) {
     } else {
         return this->setAge(this->age - _age);
     }
+}
+
+int main() {
+
+    Person p("Jon Doe", 34, 120);
+
+    try
+    {
+        for(int i = 0; i < 120; ++i)
+        p.makeYounger(i);
+    }
+    catch(PersonException &pe)
+    {
+        cerr << "Exception caught: ";
+        cerr << pe.what() << endl;
+    }
+    
+    return 0;
+
 }
