@@ -30,6 +30,9 @@ int main() {
     phone_bookA.swap(phone_bookB);
 
     print_book(phone_bookA);
+
+    cout << "Capacity " << phone_bookA.capacity() << endl;
+    cout << phone_bookA.begin().
   
 
 }
