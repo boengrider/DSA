@@ -11,7 +11,7 @@ int main() {
 
 }
 
-//value of the local variable x is maintained
+//value of the static variable x is maintained
 //between calls
 //x is initialized once in .data section
 /** 
@@ -30,7 +30,7 @@ foo:
 	cmpl	$0, -4(%rbp)
 	jle	.L4
     **************************
-	movl	x.0(%rip), %eax  *  static local variable x loaded from data section
+	movl	x.0(%rip), %eax  *  static variable x loaded from data section
 	addl	$1, %eax         *  incremented
 	movl	%eax, x.0(%rip)  *  and stored back so that it's value is preserved
     **************************
@@ -80,12 +80,12 @@ frame 5; n = 1; x = 5
 frame 6; n = 0; x = 5
 
 unwinding phase:
-frame 6; return 0
-frame 5; return 0 from previous frame + 5        (5)
-frame 4; return 5 from previous frame + 5        (10)
-frame 3; return 10 from previous frame + 5       (15)
-frame 2; return 15 from previous frame + 5       (20)
-frame 1; return 20 from previous frame + 5       (25)
+frame 6; base condition; return 0
+frame 5; return 0 from previous frame + x        (5)
+frame 4; return 5 from previous frame + x        (10)
+frame 3; return 10 from previous frame + x       (15)
+frame 2; return 15 from previous frame + x       (20)
+frame 1; return 20 from previous frame + x       (25)
 **/
 
 
