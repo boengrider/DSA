@@ -61,7 +61,7 @@ x.0:
 int foo(int n) {
 
    static int x = 0;
-
+   
    if(n > 0) {
     x++;
     return foo(n-1) + x;
@@ -69,6 +69,21 @@ int foo(int n) {
     return 0;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
 winding phase:

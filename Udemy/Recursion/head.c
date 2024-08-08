@@ -8,10 +8,14 @@ int main() {
     
 
     printf("Tail -> ");
-    tail(10);
+    tail(10);   
+
+    printf("\n");
 
     printf("Head -> ");
     head(10);
+
+    printf("\n");
   
    
 }
@@ -23,10 +27,7 @@ void tail(int n) {
     if(n > 0) {
         printf("%d ", n);
         tail(n - 1);   
-    } else {
-        printf("\n");
     }
-
 }
 
 //Prints the sequence starting from 1 to 'n'
