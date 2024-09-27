@@ -4,9 +4,9 @@
 //Array structure
 struct Array 
 {
-    int A[20];
-    int size;
-    int length;
+    int A[10];
+    int size; //Maximum number of elements stored
+    int length; //Current number of elements stored
 };
 
 //Prototypes of operations supported by an Array 
@@ -21,10 +21,11 @@ int main() {
 
     //1st struct member is an array of ints
     //2nd & 3rd struct members are ints, size and length 
-    struct Array arr = {{10,20,30,40}, 20, 4};
+    struct Array arr = {{10,20,30,40,50,60,70,80,90}, 10, 9};
     
 
     //Call "methods"
+    /**
     printf("\nDisplay()\n");
     Display(&arr);
     printf("----------------------------\n");
@@ -45,6 +46,13 @@ int main() {
     printf("-----------------------------\n");
     printf("\nGet()\n");
     Get(&arr);
+    **/
+
+    while(1) {
+    Display(&arr);
+    Insert(&arr);
+    Display(&arr);
+    }
 
 
     return 0;
@@ -108,9 +116,27 @@ void Insert(struct Array *arr) {
     scanf("%d", &__index);
     
     if(__index >= arr->size) {
+        //Index is beyond array boundaries
         printf("\nIndex out of bounds\n");
-    } else if (__index >= arr->length) {
-        //We're inserting at the free slot
-        arr->A[__index] = __value;
+    } else if(arr->length < arr->size) {
+        printf("Appending\n");
+        //Insert element at the last available position
+        arr->A[arr->length] = __value;
+        arr->length++;
+    } else {
+        if(__index == arr->length - 1) {
+            //Simply insert at the very end
+            arr->A[__index] = __value;
+        } else {
+            //We have some shifting to do
+            int __stlIndex = arr->length - 2; //second to last index
+
+            //Keep shifting until we arrive at the requested index
+            while(__stlIndex >= __index) {
+                arr->A[__stlIndex + 1] = arr->A[__stlIndex];
+                __stlIndex--;
+            }
+            arr->A[__index] = __value;
+        }
     }
 }
