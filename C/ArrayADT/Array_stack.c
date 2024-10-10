@@ -1,11 +1,10 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 //Array structure
 struct Array 
 {
     int A[10];
-    int size; //Maximum number of elements stored
+    int size;   //Maximum number of elements stored
     int length; //Current number of elements stored
 };
 
@@ -20,46 +19,31 @@ void Insert(struct Array*);
 int main() {
 
     //1st struct member is an array of ints
-    //2nd & 3rd struct members are ints, size and length 
+    //2nd & 3rd struct members are ints, size and length of an array
+    //Len is set to 9, so we're leaving one free slot
     struct Array arr = {{10,20,30,40,50,60,70,80,90}, 10, 9};
     
 
-    //Call "methods"
-    /**
-    printf("\nDisplay()\n");
-    Display(&arr);
-    printf("----------------------------\n");
-    printf("\nGet()\n");
-    Get(&arr);
-    printf("----------------------------\n");
-    printf("\nLength()\n");
-    Length(&arr);
-    printf("----------------------------\n");
-    printf("\nAppend()\n");
-    Append(&arr);
-    printf("----------------------------\n");
-    printf("\nLength()\n");
-    Length(&arr);
-    printf("-----------------------------\n");
-    printf("\nSwap()\n");
-    Swap(&arr);
-    printf("-----------------------------\n");
-    printf("\nGet()\n");
-    Get(&arr);
-    **/
-
     while(1) {
-    Display(&arr);
-    Insert(&arr);
-    Display(&arr);
+        Display(&arr);
+        Insert(&arr);
+        Display(&arr);
     }
-
 
     return 0;
 
 }
 
-//Definitions of operations supported by an Array 
+
+//===================================================
+// Definitions of operations supported by Array ADT
+//===================================================
+
+
+
+/*********************************
+ Get elemenent at specified index
+*********************************/
 void Get(struct Array *arr) {
     int __index;
     printf("Enter index of an element\n");
@@ -71,6 +55,9 @@ void Get(struct Array *arr) {
     }
 }
 
+/************************************
+ Display current contents of an array
+************************************/
 void Display(struct Array *arr) {
     for(int i = 0; i < arr->length; ++i) {
         printf("%d ", arr->A[i]);
@@ -78,6 +65,12 @@ void Display(struct Array *arr) {
     printf("\n");
 }
 
+/******************************
+ Append to the end of an array, 
+ given it's not full. If the array
+ is not full, insert appends an
+ element istead of inserting it
+*******************************/
 void Append(struct Array *arr) {
     int __value;
     if(arr->length < arr->size) {
@@ -89,10 +82,17 @@ void Append(struct Array *arr) {
     }
 }
 
+/*********************************
+ Get length i.e current number of 
+ elements stored in an array
+*********************************/
 void Length(struct Array *arr) {
     printf("%d\n",arr->length);
 }
 
+/*********************************
+ Swap two elements within an array
+**********************************/
 void Swap(struct Array *arr) {
     int __index;
     int __value;
@@ -107,6 +107,11 @@ void Swap(struct Array *arr) {
     }
 }
 
+/*******************************************
+ Insert element at the specified index.
+ Move elements to the right by one position,
+ poping the last element out
+ *******************************************/
 void Insert(struct Array *arr) {
     int __index;
     int __value;
