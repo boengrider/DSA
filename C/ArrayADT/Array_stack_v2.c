@@ -1,5 +1,6 @@
 #include <stdio.h>
 #define INSERT_NICE
+#define BINARY_SEARCH
 #define SIZE 10
 
 //Array structure
@@ -19,7 +20,8 @@ void Swap(struct Array*);
 void Insert(struct Array*);
 void InsertNice(struct Array*);
 void Delete(struct Array*);
-int Search(struct Array*);
+int LinearSearch(struct Array*);
+int BinarySearch(struct Array*);
 
 
 int main() {
@@ -48,9 +50,16 @@ int main() {
     }
     */
 
-
-    int index = Search(&arr);
-    printf("%d\n", index);
+    int index;
+    while(1) {
+        #ifdef BINARY_SEARCH
+            index = BinarySearch(&arr);
+            printf("%d\n", index);
+            Display(&arr);
+        #else
+            index = LinearSearch(&arr);
+        #endif
+    } 
 
     return 0;
 
@@ -219,7 +228,7 @@ void Delete(struct Array *arr) {
 /***************************************
  * Linear search 
 ****************************************/
-int Search(struct Array *arr) {
+int LinearSearch(struct Array *arr) {
     int __value;
     printf("Enter value ");
     scanf("%d", &__value);
@@ -228,6 +237,29 @@ int Search(struct Array *arr) {
         if(__value == arr->A[i])
             //found
             return i;
+    }
+
+    //not found
+    return -1;
+}
+
+/*****************************************
+ * Binary search
+ ****************************************/
+int BinarySearch(struct Array *arr) {
+    int __value;
+    printf("Enter value ");
+    scanf("%d", &__value);
+
+    for(int i = 0; i < arr->length; i++) {
+        if(__value == arr->A[i]) {
+            int __tmp = arr->A[i];                //found
+            int __iPrev = (i == 0) ? 0 : (i - 1); //do not shift element past index 0
+            arr->A[i] = arr->A[__iPrev];          //shift element closer to the start 
+            arr->A[__iPrev] = __tmp;
+            
+            return i;
+        }
     }
 
     //not found
