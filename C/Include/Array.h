@@ -1,8 +1,5 @@
 #include <stdio.h>
-#define INSERT_NICE
-#define BINARY_SEARCH
-#define SIZE 10
-
+#define SIZE 15
 //Array structure
 struct Array 
 {
@@ -10,6 +7,11 @@ struct Array
     int size;   //Maximum number of elements stored
     int length; //Current number of elements stored
 };
+
+#define INSERT_NICE
+#define LINEAR_SEARCH
+#define LINEAR_SEARCH_WITH_SHIFT
+
 
 //Prototypes of operations supported by an Array 
 void Display(struct Array*);
@@ -21,50 +23,9 @@ void Insert(struct Array*);
 void InsertNice(struct Array*);
 void Delete(struct Array*);
 int LinearSearch(struct Array*);
+int LinearSearchWithShift(struct Array*);
 int BinarySearch(struct Array*);
-
-
-int main() {
-
-    //Init using initializer list
-    //Len is set to 9, so we're leaving one free slot
-    struct Array arr = {{10,20,30,40,50,60,70,80,90}, 10, 9};
-    
-
-    /*
-    while(1) {
-        printf("Displaying array\n");
-        Display(&arr);
-        printf("Inserting element\n");
-        #ifdef INSERT_NICE
-            InsertNice(&arr);
-        #else
-            Insert(&arr);
-        #endif
-        printf("Displaying array\n");
-        Display(&arr);
-        printf("Deleteing element\n");
-        Delete(&arr);
-        printf("Displaying array\n");
-        Display(&arr);
-    }
-    */
-
-    int index;
-    while(1) {
-        #ifdef BINARY_SEARCH
-            index = BinarySearch(&arr);
-            printf("%d\n", index);
-            Display(&arr);
-        #else
-            index = LinearSearch(&arr);
-        #endif
-    } 
-
-    return 0;
-
-}
-
+void BubbleSort(struct Array*);
 
 //===================================================
 // Definitions of operations supported by Array ADT
@@ -244,9 +205,9 @@ int LinearSearch(struct Array *arr) {
 }
 
 /*****************************************
- * Binary search
- ****************************************/
-int BinarySearch(struct Array *arr) {
+ * Linear search with shift left by one
+ *****************************************/
+int LinearSearchWithShift(struct Array *arr) {
     int __value;
     printf("Enter value ");
     scanf("%d", &__value);
@@ -266,3 +227,49 @@ int BinarySearch(struct Array *arr) {
     return -1;
 }
 
+/*****************************************
+ * Binary search
+ *****************************************/
+int BinarySearch(struct Array *arr) {
+    int __value;
+    printf("Enter value ");
+    scanf("%d", &__value);
+
+    int __low,__mid,__high;
+    __low = 0;
+    __high = arr->length;
+    __mid = (0 + __high) / 2;
+
+    while(__low < __high) {
+        if(__value == arr->A[__mid]) {
+            return __mid;
+        } else if (__value < arr->A[__mid])
+        {
+            
+        } else if (__value > arr->A[__mid]) {
+            
+        }
+    }
+
+    //not found
+    return -1;
+}
+
+void BubbleSort(struct Array* arr) {
+    int swaps;
+    do
+    {
+        //we need at least one pass even if the array is
+        //already sorted
+        swaps = 0;
+        for(int i = 0; i < arr->length; i++) {
+            int tmp;
+            if(arr->A[i] > arr->A[i+1]) {
+                tmp = arr->A[i+1];
+                arr->A[i+1] = arr->A[i];
+                arr->A[i] = tmp;
+                swaps = 1;
+            }
+        }
+    } while (swaps > 0);
+}
