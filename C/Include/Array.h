@@ -235,19 +235,19 @@ int BinarySearch(struct Array *arr) {
     printf("Enter value ");
     scanf("%d", &__value);
 
-    int __low,__mid,__high;
+    int __low,__high;
     __low = 0;
     __high = arr->length;
-    __mid = (0 + __high) / 2;
-
-    while(__low < __high) {
+    
+    while(__low <= __high) {
+        int __mid = (__low + __high) / 2;
         if(__value == arr->A[__mid]) {
             return __mid;
         } else if (__value < arr->A[__mid])
         {
-            
+            __high = __mid - 1;
         } else if (__value > arr->A[__mid]) {
-            
+            __low = __mid + 1;
         }
     }
 
