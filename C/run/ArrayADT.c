@@ -5,7 +5,7 @@ void isSorted(struct ArrayADT*);
 
 int main() {
 
-    struct ArrayADT myArray = {0, 15, 3, {1,2,3}};
+    struct ArrayADT myArray = {UNSORTED, 15, 3, {1,2,3}};
 
     printf("Array after inialization is ");
     isSorted(&myArray);

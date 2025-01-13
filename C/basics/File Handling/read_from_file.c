@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
+
 void seekEnd();
 
 int main(int argc, char *argv[]) {

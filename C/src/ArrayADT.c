@@ -59,7 +59,7 @@ void Append(struct ArrayADT *arp, int value) {
         printf("ArrayADT is full\n");
     }
 
-    arp->sorted = 0;
+    arp->sorted = UNSORTED;
 }
 
 /*********************************
@@ -106,7 +106,7 @@ void Insert(struct ArrayADT *arp, int value, int index) {
 
     }
 
-    arp->sorted = 0;
+    arp->sorted = SORTED;
 }
 
 /***************************************
@@ -167,7 +167,7 @@ int BinarySearch(struct ArrayADT *arp, int value) {
     __low = 0;
     __high = arp->length;
 
-    if(!arp->sorted) {
+    if(arp->sorted = UNSORTED) {
         BubbleSort(arp);
     }
     
@@ -204,5 +204,5 @@ void BubbleSort(struct ArrayADT* arp) {
         }
     } while (swaps > 0);
 
-    arp->sorted = 1;
+    arp->sorted = SORTED;
 }

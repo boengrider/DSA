@@ -7,6 +7,8 @@
 #define INSERT_NICE
 #define LINEAR_SEARCH
 #define LINEAR_SEARCH_WITH_SHIFT
+#define SORTED 1
+#define UNSORTED 0
 
 //ArrayADT structure
 struct ArrayADT
