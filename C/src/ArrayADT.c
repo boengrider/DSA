@@ -106,7 +106,7 @@ void Insert(struct ArrayADT *arp, int value, int index) {
 
     }
 
-    arp->sorted = SORTED;
+    arp->sorted = UNSORTED;
 }
 
 /***************************************
