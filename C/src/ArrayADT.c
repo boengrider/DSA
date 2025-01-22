@@ -81,15 +81,18 @@ int Insert(struct ArrayADT *arp, int value, int index) {
    if(index >= arp->size || index < 0)
         return -1;
 
-   //store value
-   int __tmp = arp->A[index];
-   int __last;
+   //if array is full last element is popped, otherwise we have some 
+   //space to the right
+   int i = (arp->length == arp->size) ? arp->length - 1 : arp->length;
 
-   if(arp->length < arp->size) {
-        __last = arp->length;
-   } else {
-    
+   while(i > index) {
+        arp->A[i] = arp->A[i - 1];
+        i--;
    }
+
+   arp->A[index] = value;
+
+   return index;
    
 }
 
@@ -101,7 +104,7 @@ int Insert(struct ArrayADT *arp, int value, int index) {
  * if successfull index of the new value is 
  * returned, -1 otherwise
  */
-void Swap(struct ArrayADT *arp, int value, int index) {
+int Swap(struct ArrayADT *arp, int value, int index) {
 
     if(index >= arp->size || index < 0)
         return -1;

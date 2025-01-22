@@ -36,5 +36,5 @@ extern int LinearSearch(struct ArrayADT*, int);
 extern int LinearSearchWithShift(struct ArrayADT*, int);
 extern int BinarySearch(struct ArrayADT*, int);
 extern void _BubbleSort(struct ArrayADT*);
-extern void Swap(struct ArrayADT*, int, int);
+extern int Swap(struct ArrayADT*, int, int);
 extern void Reverse(struct ArrayADT* arp);
