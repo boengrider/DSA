@@ -6,3 +6,6 @@ Glthreads:
 
 ArrayADT:
 	$(CC) ArrayADT.c ../src/ArrayADT.c -o ArrayADT $(CFLAGS)
+
+Clean:
+	rm ArrayADT

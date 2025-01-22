@@ -1,9 +1,9 @@
 /*************************************************************
- * ArrayADT abstract data type
- *Supports basic methods such as Display, Search, Sort etc
+ * ArrayADT (Abstract data type)
+ * Supports basic methods such as Display, Search, Sort etc
  ************************************************************/
 #include <stdio.h>
-#define SIZE 15
+#define MAX_SIZE 15
 #define INSERT_NICE
 #define LINEAR_SEARCH
 #define LINEAR_SEARCH_WITH_SHIFT
@@ -16,20 +16,25 @@ struct ArrayADT
     int sorted;
     int size;   //Maximum number of elements stored
     int length; //Current number of elements stored
-    int A[SIZE];//Fixed size of SIZE elements
+    int A[MAX_SIZE];//Fixed size of SIZE elements
     
 };
 
 
-//Prototypes of operations supported by an ArrayADT 
+//Operations supported by an ArrayADT 
 extern void Display(struct ArrayADT*);
-extern void Get(struct ArrayADT*, int);
-extern void Append(struct ArrayADT*, int);
-extern void Length(struct ArrayADT*);
-extern void Swap(struct ArrayADT*, int, int);
-extern void Insert(struct ArrayADT*, int, int);
+extern int Get(struct ArrayADT*, int);
+extern int Set(struct ArrayADT*, int, int);
+extern int Max(struct ArrayADT*);
+extern int Min(struct ArrayADT*);
+extern long Sum(struct ArrayADT*);
+extern long Avg(struct ArrayADT* arp);
+extern int Length(struct ArrayADT*);
+extern int Insert(struct ArrayADT*, int, int);
 extern int Delete(struct ArrayADT*, int);
 extern int LinearSearch(struct ArrayADT*, int);
 extern int LinearSearchWithShift(struct ArrayADT*, int);
 extern int BinarySearch(struct ArrayADT*, int);
-extern void BubbleSort(struct ArrayADT*);
+extern void _BubbleSort(struct ArrayADT*);
+extern void Swap(struct ArrayADT*, int, int);
+extern void Reverse(struct ArrayADT* arp);
