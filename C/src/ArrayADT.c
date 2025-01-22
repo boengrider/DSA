@@ -75,8 +75,19 @@ int Length(struct ArrayADT *arp) {
  not beyond the ArrayADT boundaries
  Last element is popped 
  *************************************/
-int Insert(struct ArrayADT *arp, int value, int index) {
+int Insert(struct ArrayADT *arp, int value, int index, enum Insert params) {
    
+
+   //not implemented yet
+   /* switch(params) {
+    case PRESERVE_SORTED:
+
+    case IGNORE_SORTED:
+
+    default:
+   } */
+
+
    //out of bounds
    if(index >= arp->size || index < 0)
         return -1;
@@ -91,6 +102,9 @@ int Insert(struct ArrayADT *arp, int value, int index) {
    }
 
    arp->A[index] = value;
+
+   if(arp->length < arp->size)
+    arp->length++;
 
    return index;
    

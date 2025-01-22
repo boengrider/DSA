@@ -17,7 +17,7 @@ int main() {
     printf(" Contents -> ");
     Display(&myArray);
 
-    Insert(&myArray, 15, 14);
+    Insert(&myArray, 0, 0, PRESERVE_SORTED);
 
     printf("Current array state:\n");
     printf(" Length -> %d\n", Length(&myArray));

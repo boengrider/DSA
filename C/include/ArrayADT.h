@@ -20,6 +20,10 @@ struct ArrayADT
     
 };
 
+enum Insert {
+    PRESERVE_SORTED,
+    IGNORE_SORTED
+};
 
 //Operations supported by an ArrayADT 
 extern void Display(struct ArrayADT*);
@@ -30,7 +34,7 @@ extern int Min(struct ArrayADT*);
 extern long Sum(struct ArrayADT*);
 extern long Avg(struct ArrayADT* arp);
 extern int Length(struct ArrayADT*);
-extern int Insert(struct ArrayADT*, int, int);
+extern int Insert(struct ArrayADT*, int, int, enum Insert);
 extern int Delete(struct ArrayADT*, int);
 extern int LinearSearch(struct ArrayADT*, int);
 extern int LinearSearchWithShift(struct ArrayADT*, int);
