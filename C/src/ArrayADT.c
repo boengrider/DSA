@@ -75,7 +75,7 @@ int Length(struct ArrayADT *arp) {
  not beyond the ArrayADT boundaries
  Last element is popped 
  *************************************/
-int Insert(struct ArrayADT *arp, int value, int index, enum Insert params) {
+int Insert(struct ArrayADT *arp, int value, int index) {
    
 
    //not implemented yet
@@ -93,7 +93,7 @@ int Insert(struct ArrayADT *arp, int value, int index, enum Insert params) {
         return -1;
 
    //if array is full last element is popped, otherwise we have some 
-   //space to the right
+   //space to the right, so use that index as last
    int i = (arp->length == arp->size) ? arp->length - 1 : arp->length;
 
    while(i > index) {
@@ -106,6 +106,7 @@ int Insert(struct ArrayADT *arp, int value, int index, enum Insert params) {
    if(arp->length < arp->size)
     arp->length++;
 
+   arp->sorted = UNSORTED;
    return index;
    
 }
@@ -302,4 +303,8 @@ void _BubbleSort(struct ArrayADT* arp) {
     } while (swaps > 0);
 
     arp->sorted = SORTED;
+}
+
+int Merge(struct ArrayADT* arpa, struct ArrayADT* arpb) {
+    
 }

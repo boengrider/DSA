@@ -1,30 +1,36 @@
 #include "ArrayADT.h"
 #include <stdio.h>
+#include <errno.h>
 
-#define LENGTH 14
+#define LENGTHA 15
+#define LENGTHB 14
+#define LENGTHC 10
 void isSorted(struct ArrayADT*);
+void printState(struct ArrayADT*);
 
 int main() {
 
-    struct ArrayADT myArray = {UNSORTED, MAX_SIZE, LENGTH, {1,2,3,4,5,6,7,8,9,10,11,12,13,14}};
-
- 
     
-    printf("Initial array state:\n");
-    printf(" Length -> %d\n", Length(&myArray));
-    printf(" Sorted -> ");
-    isSorted(&myArray);
-    printf(" Contents -> ");
-    Display(&myArray);
+    struct ArrayADT ar = {SORTED, MAX_SIZE, LENGTHC, {1,2,3,4,5,6,7,8,9,10}};
 
-    Insert(&myArray, 0, 0, PRESERVE_SORTED);
+    struct ArrayADT *par = &ar;
+   
+    for(int i = 11; i <= 16; i++) {
+        printState(par);
+        
+        if(Insert(par, i, par->length) < 0)
+            printf("Array is full\n");
+    }
 
-    printf("Current array state:\n");
-    printf(" Length -> %d\n", Length(&myArray));
-    printf(" Sorted -> ");
-    isSorted(&myArray);
-    printf(" Contents -> ");
-    Display(&myArray);
+
+    Reverse(par);
+    printState(par);
+    _BubbleSort(par);
+    printState(par);
+   
+   
+    
+    
 
 
 
@@ -152,8 +158,28 @@ int main() {
 
 void isSorted(struct ArrayADT* arp) {
     if(arp->sorted == SORTED) { 
-        printf("Sorted\n");
+        printf("True\n");
     } else {
-        printf("Unsorted\n");
+        printf("False\n");
     }
+}
+
+void isFull(struct ArrayADT* arp) {
+    if(arp->length == arp->size) {
+        printf("True\n");
+    } else {
+        printf("False\n");
+    }
+}
+
+
+void printState(struct ArrayADT *arp) {
+    printf("\nCurrent array's sate:\n");
+    printf(" Length -> %d\n", Length(arp));
+    printf(" Sorted -> ");
+    isSorted(arp);
+    printf(" Full -> ");
+    isFull(arp);
+    printf(" Contents -> ");
+    Display(arp);
 }
