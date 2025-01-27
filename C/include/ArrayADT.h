@@ -9,6 +9,12 @@
 #define LINEAR_SEARCH_WITH_SHIFT
 #define SORTED 1
 #define UNSORTED 0
+#define ORDER_OTHER -2
+#define ORDER_UNSORTED -1
+#define ORDER_ASCENDING 1
+#define ORDER_DESCENDING 0
+
+
 
 //ArrayADT structure
 struct ArrayADT
@@ -28,7 +34,7 @@ enum Insert {
 //Operations supported by an ArrayADT 
 extern void Display(struct ArrayADT*);
 extern int Get(struct ArrayADT*, int);
-extern int Set(struct ArrayADT*, int, int);
+extern int Set(struct ArrayADT* _array, int _index, int _value);
 extern int Max(struct ArrayADT*);
 extern int Min(struct ArrayADT*);
 extern long Sum(struct ArrayADT*);
@@ -43,3 +49,4 @@ extern void _BubbleSort(struct ArrayADT*);
 extern int Swap(struct ArrayADT*, int, int);
 extern void Reverse(struct ArrayADT* _array);
 extern int Merge(struct ArrayADT* _arraya, struct ArrayADT* _arrayb);
+extern int SortedOrder(struct ArrayADT* _array);

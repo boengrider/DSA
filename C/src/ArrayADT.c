@@ -222,9 +222,6 @@ void Reverse(struct ArrayADT* arp) {
     arp->A[i] = arp->A[last - i];
     arp->A[last - i] = __tmp;
    }
-
-    //technically it's sorted but in the different order
-    arp->sorted = UNSORTED;
 }
 
 
@@ -283,7 +280,7 @@ int BinarySearch(struct ArrayADT *arp, int value) {
     return -1;
 }
 
-void _BubbleSort(struct ArrayADT* arp) {
+void _BubbleSort(struct ArrayADT *arp) {
     int swaps;
 
     do
@@ -305,6 +302,38 @@ void _BubbleSort(struct ArrayADT* arp) {
     arp->sorted = SORTED;
 }
 
-int Merge(struct ArrayADT* arpa, struct ArrayADT* arpb) {
+int Merge(struct ArrayADT *arpa, struct ArrayADT *arpb) {
     
 }
+
+int SortedOrder(struct ArrayADT *arp) {
+    
+    if(arp->length <= 1)
+        return ORDER_OTHER;
+
+    if(arp->sorted == UNSORTED) {
+        printf("ORDER_UNSORTED\n");
+        return ORDER_UNSORTED;
+    }
+    
+    int i = 0;
+    while(i < arp->length - 1) {
+        if(arp->A[i] == arp->A[i+1]) {
+            i++;
+        } else {
+            break;
+        }
+    }
+
+    if(i == arp->length - 1) 
+        return ORDER_OTHER;
+
+
+    if(arp->A[i] > arp->A[i+1]) 
+        return ORDER_DESCENDING;
+    
+
+    if(arp->A[i] < arp->A[i+1]) 
+        return ORDER_ASCENDING;
+    
+};

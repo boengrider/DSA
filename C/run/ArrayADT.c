@@ -7,6 +7,7 @@
 #define LENGTHC 10
 void isSorted(struct ArrayADT*);
 void printState(struct ArrayADT*);
+void sortOrder(struct ArrayADT*); 
 
 int main() {
 
@@ -19,144 +20,28 @@ int main() {
         printState(par);
         
         if(Insert(par, i, par->length) < 0)
-            printf("Array is full\n");
+            printf("\nArray is full\n");
     }
 
+    _BubbleSort(par);
+    printState(par);
 
     Reverse(par);
     printState(par);
+
+
+     for(int i = 0; i <= par->length; i++) {
+        Set(par, i, 0);
+    }
+
+
+    
     _BubbleSort(par);
     printState(par);
-   
-   
-    
-    
-
-
-
-    /**
-    printf("\nLinear search called. Searching element 12\n");
-    printf("Element found at index %d\n",  LinearSearch(&myArray, 12));
-    printf("Array state:\n");
-    printf(" Length -> %d\n", Length(&myArray));
-    printf(" Sorted -> ");
-    isSorted(&myArray);
-    printf(" Contents -> ");
-    Display(&myArray);
-
-    printf("\nBinary search called. Searching element 15\n");
-    printf("Element found at index %d\n",  BinarySearch(&myArray, 15));
-    printf("Array state:\n");
-    printf(" Length -> %d\n", Length(&myArray));
-    printf(" Sorted -> ");
-    isSorted(&myArray);
-    printf(" Contents -> ");
-    Display(&myArray);
-
-    printf("\nLinear search with shift called. Searching element 13\n");
-    printf("Element found at index %d\n",  LinearSearchWithShift(&myArray, 13));
-    printf("Array state:\n");
-    printf(" Length -> %d\n", Length(&myArray));
-    printf(" Sorted -> ");
-    isSorted(&myArray);
-    printf(" Contents -> ");
-    Display(&myArray);
-
-    printf("\nLinear search with shift called. Searching element 13\n");
-    printf("Element found at index %d\n",  LinearSearchWithShift(&myArray, 13));
-    printf("Array state:\n");
-    printf(" Length -> %d\n", Length(&myArray));
-    printf(" Sorted -> ");
-    isSorted(&myArray);
-    printf(" Contents -> ");
-    Display(&myArray);
-
-    printf("\nBinary search called. Searching element 15\n");
-    printf("Element found at index %d\n",  BinarySearch(&myArray, 15));
-    printf("Array state:\n");
-    printf(" Length -> %d\n", Length(&myArray));
-    printf(" Sorted -> ");
-    isSorted(&myArray);
-    printf(" Contents -> ");
-    Display(&myArray);
-
-    printf("\nInserting element 100 at index 9\n");
-    Insert(&myArray, 100, 9);
-    printf("Array state:\n");
-    printf(" Length -> %d\n", Length(&myArray));
-    printf(" Sorted -> ");
-    isSorted(&myArray);
-    printf(" Contents -> ");
-    Display(&myArray);
-
-    printf("\nSwapping element at index 9 with value 99\n");
-    Swap(&myArray, 99, 9);
-    printf("Array state:\n");
-    printf(" Length -> %d\n", Length(&myArray));
-    printf(" Sorted -> ");
-    isSorted(&myArray);
-    printf(" Contents -> ");
-    Display(&myArray);
-
-    printf("\nSetting element at index 9 to 100\n");
-    Set(&myArray, 9, 100);
-    printf("Array state:\n");
-    printf(" Length -> %d\n", Length(&myArray));
-    printf(" Sorted -> ");
-    isSorted(&myArray);
-    printf(" Contents -> ");
-    Display(&myArray);
-
-    printf("\nMax value stored in the array %d\n",Max(&myArray));
-    printf("Array state:\n");
-    printf(" Length -> %d\n", Length(&myArray));
-    printf(" Sorted -> ");
-    isSorted(&myArray);
-    printf(" Contents -> ");
-    Display(&myArray);
-
-    printf("\nMin value stored in the array %d\n",Min(&myArray));
-    printf("Array state:\n");
-    printf(" Length -> %d\n", Length(&myArray));
-    printf(" Sorted -> ");
-    isSorted(&myArray);
-    printf(" Contents -> ");
-    Display(&myArray);
-
-    printf("\nSum of the values stored in the array %ld\n",Sum(&myArray));
-    printf("Array state:\n");
-    printf(" Length -> %d\n", Length(&myArray));
-    printf(" Sorted -> ");
-    isSorted(&myArray);
-    printf(" Contents -> ");
-    Display(&myArray);
-
-    printf("\nAverage value stored in the array %ld\n",Avg(&myArray));
-    printf("Array state:\n");
-    printf(" Length -> %d\n", Length(&myArray));
-    printf(" Sorted -> ");
-    isSorted(&myArray);
-    printf(" Contents -> ");
-    Display(&myArray);
-
-    printf("\nReversing the array\n");
-    Reverse(&myArray);
-    printf("Array state:\n");
-    printf(" Length -> %d\n", Length(&myArray));
-    printf(" Sorted -> ");
-    isSorted(&myArray);
-    printf(" Contents -> ");
-    Display(&myArray);
-
-   **/
-
-
-
-
 
 }
 
-void isSorted(struct ArrayADT* arp) {
+void isSorted(struct ArrayADT *arp) {
     if(arp->sorted == SORTED) { 
         printf("True\n");
     } else {
@@ -164,12 +49,34 @@ void isSorted(struct ArrayADT* arp) {
     }
 }
 
-void isFull(struct ArrayADT* arp) {
+void isFull(struct ArrayADT *arp) {
     if(arp->length == arp->size) {
         printf("True\n");
     } else {
         printf("False\n");
     }
+}
+
+void sortOrder(struct ArrayADT *arp) {
+    switch (SortedOrder(arp))
+    {
+    case ORDER_ASCENDING:
+        printf("Ascending\n");
+        break;
+    
+    case ORDER_DESCENDING:
+        printf("Descending\n");
+        break;
+
+    case ORDER_OTHER:
+        printf("Other\n");
+        break;
+
+    case ORDER_UNSORTED:
+        printf("Unsorted\n");
+        break;
+    }
+
 }
 
 
@@ -178,6 +85,8 @@ void printState(struct ArrayADT *arp) {
     printf(" Length -> %d\n", Length(arp));
     printf(" Sorted -> ");
     isSorted(arp);
+    printf(" Sorted order -> ");
+    sortOrder(arp);
     printf(" Full -> ");
     isFull(arp);
     printf(" Contents -> ");
