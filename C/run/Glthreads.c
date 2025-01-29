@@ -1,4 +1,3 @@
-//#include "/home/vscode/git/DSA/C/include/Glthreads.h" // Glued doubly linked list
 #include "Glthreads.h"
 #include <stdio.h>
 #include <stddef.h>

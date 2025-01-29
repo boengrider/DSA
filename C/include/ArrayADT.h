@@ -50,3 +50,4 @@ extern int Swap(struct ArrayADT*, int, int);
 extern void Reverse(struct ArrayADT* _array);
 extern int Merge(struct ArrayADT* _arraya, struct ArrayADT* _arrayb);
 extern int SortedOrder(struct ArrayADT* _array);
+extern double Median(struct ArrayADT* _array);

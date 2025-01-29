@@ -308,11 +308,11 @@ int Merge(struct ArrayADT *arpa, struct ArrayADT *arpb) {
 
 int SortedOrder(struct ArrayADT *arp) {
     
+    //there's only one element
     if(arp->length <= 1)
         return ORDER_OTHER;
 
     if(arp->sorted == UNSORTED) {
-        printf("ORDER_UNSORTED\n");
         return ORDER_UNSORTED;
     }
     
@@ -325,6 +325,7 @@ int SortedOrder(struct ArrayADT *arp) {
         }
     }
 
+    //all elements are the same value
     if(i == arp->length - 1) 
         return ORDER_OTHER;
 
@@ -337,3 +338,8 @@ int SortedOrder(struct ArrayADT *arp) {
         return ORDER_ASCENDING;
     
 };
+
+double Median(struct ArrayADT *arp) {
+
+    int offset = arp->length % 2 + 1
+}
