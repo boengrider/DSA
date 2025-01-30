@@ -7,6 +7,9 @@
 #define INSERT_NICE
 #define LINEAR_SEARCH
 #define LINEAR_SEARCH_WITH_SHIFT
+#define QUICK_SORT_PIVOT_MEDIAN
+//#define QUICK_SORT_PIVOT_LAST
+//#define QUICK_SORT_PIVOT_FIRST
 #define SORTED 1
 #define UNSORTED 0
 #define ORDER_OTHER -2
@@ -51,3 +54,4 @@ extern void Reverse(struct ArrayADT* _array);
 extern int Merge(struct ArrayADT* _arraya, struct ArrayADT* _arrayb);
 extern int SortedOrder(struct ArrayADT* _array);
 extern double Median(struct ArrayADT* _array);
+extern void _QuickSort(struct ArrayADT* _array);

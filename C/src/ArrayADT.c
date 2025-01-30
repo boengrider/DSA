@@ -311,13 +311,15 @@ int SortedOrder(struct ArrayADT *arp) {
     //there's only one element
     if(arp->length <= 1)
         return ORDER_OTHER;
-
+    //array is unsorted
     if(arp->sorted == UNSORTED) {
         return ORDER_UNSORTED;
     }
     
+    //array's sorted. Determine order
     int i = 0;
     while(i < arp->length - 1) {
+        //loop as long as two neighbours are equal
         if(arp->A[i] == arp->A[i+1]) {
             i++;
         } else {
@@ -329,11 +331,11 @@ int SortedOrder(struct ArrayADT *arp) {
     if(i == arp->length - 1) 
         return ORDER_OTHER;
 
-
+    //descending order
     if(arp->A[i] > arp->A[i+1]) 
         return ORDER_DESCENDING;
     
-
+    //ascending order
     if(arp->A[i] < arp->A[i+1]) 
         return ORDER_ASCENDING;
     
@@ -341,5 +343,38 @@ int SortedOrder(struct ArrayADT *arp) {
 
 double Median(struct ArrayADT *arp) {
 
-    int offset = arp->length % 2 + 1
+    if(arp->length % 2 == 0) {
+        int i = arp->length / 2;
+        return (double)(arp->A[i] + arp->A[i-1]) / 2;
+    } else {
+        return (double)(arp->A[arp->length / 2]);
+    }
+}
+
+void _QuickSort(struct ArrayADT* arp) {
+    int pivot = arp->length - 1; // Pick the last element as a pivot
+    printf("Intial pivot index %d\n", pivot);
+    
+    int i = -1;
+    int j = 0;
+    int tmp;
+
+    while(j < pivot) {
+        if(arp->A[j] < arp->A[pivot]) {
+            tmp = arp->A[++i];
+            arp->A[i] = arp->A[j];
+            arp->A[j] = tmp;
+        }
+
+        j++;
+    }
+
+    tmp = arp->A[i+1];
+    arp->A[i+1] = arp->A[pivot];
+    arp->A[pivot] = tmp;
+
+    printf("New pivot index %d\n", i + 1);
+
+    
+
 }

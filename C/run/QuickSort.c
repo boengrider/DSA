@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <errno.h>
 
-#define LENGTH 10
+#define LENGTH 5
 
 typedef enum header_ {
     SORTING,
@@ -24,46 +24,17 @@ int main() {
 
     
     //Declare and initialize an array of size MAX_SIZE containing LENGTH elements
-    struct ArrayADT ar = {UNSORTED, MAX_SIZE, LENGTH, {1,3,5,8,2,9,4,7,6,10}};
+    struct ArrayADT ar = {UNSORTED, MAX_SIZE, LENGTH, {10,80,30,90,40}};
 
     //Declare and initialize pointer to ArrayADT struct
     struct ArrayADT *par = &ar;
    
 
-    for(int i = 11; i <= 16; i++) {
-        printState(par);
-        printHeader(INSERTING);
-        if(Insert(par, i, par->length) < 0)
-            printf("\nArray is full\n");
-    }
+    printState(par);
 
     printHeader(SORTING);
-    _BubbleSort(par);
+    _QuickSort(par);
     printState(par);
-
-    printHeader(REVERSING);
-    Reverse(par);
-    printState(par);
-
-
-     for(int i = 0; i <= par->length; i++) {
-        printHeader(SETTING);
-        Set(par, i, 0);
-    }
-
-    printState(par);
-
-
-
-    printHeader(SORTING);    
-    _BubbleSort(par);
-    printState(par);
-
-
-    printHeader(DELETING);
-    Delete(par,par->length-1);
-    printState(par);
-
 
 
 
