@@ -352,9 +352,9 @@ double Median(struct ArrayADT *arp) {
 }
 
 void _QuickSort(struct ArrayADT* arp) {
+
+
     int pivot = arp->length - 1; // Pick the last element as a pivot
-    printf("Intial pivot index %d\n", pivot);
-    
     int i = -1;
     int j = 0;
     int tmp;
@@ -372,9 +372,5 @@ void _QuickSort(struct ArrayADT* arp) {
     tmp = arp->A[i+1];
     arp->A[i+1] = arp->A[pivot];
     arp->A[pivot] = tmp;
-
-    printf("New pivot index %d\n", i + 1);
-
-    
 
 }
