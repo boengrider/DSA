@@ -5,15 +5,15 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/C",
-                "${workspaceFolder}/C/Include"
+                "${workspaceFolder}/C/include"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/gcc",
+            "compilerPath": "/usr/bin/gcc-12",
             "cStandard": "c17",
             "cppStandard": "gnu++17",
             "intelliSenseMode": "linux-gcc-x64",
             "compilerArgs": [
-                "-I${workspaceFolder}/C/Include"
+                "-I${workspaceFolder}/C/include"
             ]
         }
     ],

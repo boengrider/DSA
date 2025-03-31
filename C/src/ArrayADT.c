@@ -8,7 +8,6 @@
  * Linear search. No shift
 ****************************************/
 int LinearSearch(struct ArrayADT *arp, int value) {
-
     for(int i = 0; i < arp->length; i++) {
         if(value == arp->A[i])
             //found
@@ -26,15 +25,26 @@ int LinearSearch(struct ArrayADT *arp, int value) {
 /*********************************
  Get elemenent at specified index
 *********************************/
-void Get(struct ArrayADT *arp, int index) {
-    int __index;
-    printf("Enter index of an element\n");
-    scanf("%d", &__index);
-    if(__index >= arp->size) {
-        printf("Index %d is out of bounds\n", __index);
-    } else {
-        printf("%d\n", arp->A[__index]);
-    }
+int Get(struct ArrayADT *arp, int index) {
+    //out of bounds
+    if(index >= arp->size || index < 0)
+        return -1;
+    
+    return  arp->A[index];
+}
+
+/*********************************
+ Set elemenent at specified index
+*********************************/
+int Set(struct ArrayADT* arp, int index, int value) {
+     //out of bounds
+    if(index >= arp->size || index < 0)
+        return -1;
+
+    arp->A[index] = value;
+    arp->sorted = UNSORTED;
+
+    return index;
 }
 
 /************************************
@@ -47,39 +57,15 @@ void Display(struct ArrayADT *arp) {
     printf("\n");
 }
 
-/******************************
- Append to the end of an ArrayADT
- given it's not full. 
-*******************************/
-void Append(struct ArrayADT *arp, int value) {
-    int __value;
-    if(arp->length < arp->size) {
-        arp->A[++arp->length] = value;
-    } else {
-        printf("ArrayADT is full\n");
-    }
-
-    arp->sorted = 0;
-}
 
 /*********************************
  Get length i.e current number of 
  elements stored in an ArrayADT
 *********************************/
-void Length(struct ArrayADT *arp) {
-    printf("%d\n",arp->length);
+int Length(struct ArrayADT *arp) {
+    return arp->length;
 }
 
-/*********************************
- Swap two elements within an ArrayADT
-**********************************/
-void Swap(struct ArrayADT *arp, int value, int index) {
-    if(index >= arp->size || index < 0) {
-        printf("\nIndex out of bounds\n");
-    } else { 
-        arp->A[index] = value;
-    }
-}
 
 /*************************************
  Insert element at the specified index
@@ -87,26 +73,62 @@ void Swap(struct ArrayADT *arp, int value, int index) {
  No appending. Simply insert at the 
  requested index. Only check if it's 
  not beyond the ArrayADT boundaries
+ Last element is popped 
  *************************************/
-void Insert(struct ArrayADT *arp, int value, int index) {
+int Insert(struct ArrayADT *arp, int value, int index) {
    
-    if(index >= arp->size || index < 0) {
-        printf("\nIndex out of bounds\n");
-    } else {
-        for(int i = arp->length - 1; i > index; i--) {
-            arp->A[i] = arp->A[i-1];
-        }
 
-        arp->A[index] = value;
-    }
+   //not implemented yet
+   /* switch(params) {
+    case PRESERVE_SORTED:
 
-    //Only increase size if the wasn't full before inserting
-    if(arp->length < arp->size) {
-        arp->length++;
+    case IGNORE_SORTED:
 
-    }
+    default:
+   } */
 
-    arp->sorted = 0;
+
+   //out of bounds
+   if(index >= arp->size || index < 0)
+        return -1;
+
+   //if array is full last element is popped, otherwise we have some 
+   //space to the right, so use that index as last
+   int i = (arp->length == arp->size) ? arp->length - 1 : arp->length;
+
+   while(i > index) {
+        arp->A[i] = arp->A[i - 1];
+        i--;
+   }
+
+   arp->A[index] = value;
+
+   if(arp->length < arp->size)
+    arp->length++;
+
+   arp->sorted = UNSORTED;
+   return index;
+   
+}
+
+
+/**************************************
+ * Swap
+ * Removes element at the specified index
+ * and replaces it with the provided value
+ * if successfull index of the new value is 
+ * returned, -1 otherwise
+ */
+int Swap(struct ArrayADT *arp, int value, int index) {
+
+    if(index >= arp->size || index < 0)
+        return -1;
+
+    arp->A[index] = value;
+
+    arp->sorted = UNSORTED;
+
+    return index;
 }
 
 /***************************************
@@ -116,7 +138,7 @@ void Insert(struct ArrayADT *arp, int value, int index) {
  ***************************************/
 int Delete(struct ArrayADT *arp, int index) {
 
-    if(index > arp->size || index < 0) {
+    if(index >= arp->size || index < 0) {
         return -1; //Nothing was deleted
     } else {
         for(int i = index; i < arp->length - 1; i++) {
@@ -129,6 +151,77 @@ int Delete(struct ArrayADT *arp, int index) {
 
         return index; //Return index of the deleted item
     }
+}
+
+/*******************************
+ * Return maximum value stored
+ * in the array
+ ********************************/
+int Max(struct ArrayADT *arp) {
+
+    int max = arp->A[0];
+
+    for(int i = 1; i < arp->length; i++) {
+        if(arp->A[i] > max)
+            max = arp->A[i];
+    }
+
+    return max;
+}
+
+/********************************
+ * Return minimum value stored
+ * in the array
+ ********************************/
+int Min(struct ArrayADT *arp) {
+
+    int min = arp->A[0];
+
+    for(int i = 1; i < arp->length; i++) {
+        if(arp->A[i] < min)
+            min = arp->A[i];
+    }
+
+    return min;
+}
+
+/************************************
+ * Return the sum of all the elements
+ ************************************/
+long Sum(struct ArrayADT* arp) {
+
+    long sum = 0;
+
+    for(int i = 0; i < arp->length; i++) {
+        sum += arp->A[i];
+    }
+
+    return sum;
+}
+
+/*********************************
+ * Return the average value stored
+ **********************************/
+long Avg(struct ArrayADT* arp) {
+
+    long sum = Sum(arp);
+
+    return sum / arp->length;
+}
+
+/***********************************
+ * Reverse
+ ***********************************/
+void Reverse(struct ArrayADT* arp) {
+
+   int last = arp->length - 1;
+
+   for(int i = 0; i < arp->length / 2; i++) {
+    int __tmp;
+    __tmp = arp->A[i];
+    arp->A[i] = arp->A[last - i];
+    arp->A[last - i] = __tmp;
+   }
 }
 
 
@@ -150,6 +243,7 @@ int LinearSearchWithShift(struct ArrayADT *arp, int value) {
             arp->A[i] = arp->A[__iPrev];          //shift element closer to the start 
             arp->A[__iPrev] = __tmp;
             
+            arp->sorted = UNSORTED;
             return i;
         }
     }
@@ -162,13 +256,12 @@ int LinearSearchWithShift(struct ArrayADT *arp, int value) {
  * Binary search
  *****************************************/
 int BinarySearch(struct ArrayADT *arp, int value) {
-   
     int __low,__high;
     __low = 0;
     __high = arp->length;
 
-    if(!arp->sorted) {
-        BubbleSort(arp);
+    if(arp->sorted == UNSORTED) {
+        _BubbleSort(arp);
     }
     
     while(__low <= __high) {
@@ -187,13 +280,15 @@ int BinarySearch(struct ArrayADT *arp, int value) {
     return -1;
 }
 
-void BubbleSort(struct ArrayADT* arp) {
+void _BubbleSort(struct ArrayADT *arp) {
     int swaps;
+
     do
     {
         //we need at least one pass even if the ArrayADT is already sorted
         swaps = 0;
-        for(int i = 0; i < arp->length; i++) {
+        for(int i = 0; i < arp->length - 1; i++) {
+          
             int tmp;
             if(arp->A[i] > arp->A[i+1]) {
                 tmp = arp->A[i+1];
@@ -204,5 +299,78 @@ void BubbleSort(struct ArrayADT* arp) {
         }
     } while (swaps > 0);
 
-    arp->sorted = 1;
+    arp->sorted = SORTED;
+}
+
+int Merge(struct ArrayADT *arpa, struct ArrayADT *arpb) {
+    
+}
+
+int SortedOrder(struct ArrayADT *arp) {
+    
+    //there's only one element
+    if(arp->length <= 1)
+        return ORDER_OTHER;
+    //array is unsorted
+    if(arp->sorted == UNSORTED) {
+        return ORDER_UNSORTED;
+    }
+    
+    //array's sorted. Determine order
+    int i = 0;
+    while(i < arp->length - 1) {
+        //loop as long as two neighbours are equal
+        if(arp->A[i] == arp->A[i+1]) {
+            i++;
+        } else {
+            break;
+        }
+    }
+
+    //all elements are the same value
+    if(i == arp->length - 1) 
+        return ORDER_OTHER;
+
+    //descending order
+    if(arp->A[i] > arp->A[i+1]) 
+        return ORDER_DESCENDING;
+    
+    //ascending order
+    if(arp->A[i] < arp->A[i+1]) 
+        return ORDER_ASCENDING;
+    
+};
+
+double Median(struct ArrayADT *arp) {
+
+    if(arp->length % 2 == 0) {
+        int i = arp->length / 2;
+        return (double)(arp->A[i] + arp->A[i-1]) / 2;
+    } else {
+        return (double)(arp->A[arp->length / 2]);
+    }
+}
+
+void _QuickSort(struct ArrayADT* arp) {
+
+
+    int pivot = arp->length - 1; // Pick the last element as a pivot
+    int i = -1;
+    int j = 0;
+    int tmp;
+
+    while(j < pivot) {
+        if(arp->A[j] < arp->A[pivot]) {
+            tmp = arp->A[++i];
+            arp->A[i] = arp->A[j];
+            arp->A[j] = tmp;
+        }
+
+        j++;
+    }
+
+    tmp = arp->A[i+1];
+    arp->A[i+1] = arp->A[pivot];
+    arp->A[pivot] = tmp;
+
 }
