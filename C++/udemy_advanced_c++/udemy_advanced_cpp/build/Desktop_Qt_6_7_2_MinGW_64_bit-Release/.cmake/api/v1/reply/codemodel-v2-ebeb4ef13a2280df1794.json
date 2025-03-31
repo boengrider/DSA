@@ -1,0 +1,61 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-05aa411392842e383d57.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "udemy_advanced_cpp",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "udemy_advanced_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-udemy_advanced_cpp-Release-9a392433279d7d481ef0.json",
+					"name" : "udemy_advanced_cpp",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/TomasAc/Documents/GitHub/DSA/C++/udemy_advanced_c++/udemy_advanced_cpp/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release",
+		"source" : "C:/Users/TomasAc/Documents/GitHub/DSA/C++/udemy_advanced_c++/udemy_advanced_cpp"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

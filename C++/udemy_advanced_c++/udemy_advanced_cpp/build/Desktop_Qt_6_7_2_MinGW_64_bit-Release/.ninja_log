@@ -1,0 +1,14 @@
+# ninja log v6
+14	179	7482766683340942	CMakeFiles/udemy_advanced_cpp.dir/myexception.cpp.obj	f2bc449c5772867e
+4	447	7482766683243728	CMakeFiles/udemy_advanced_cpp.dir/main.cpp.obj	2450b4e8d7f98ebe
+449	645	7482766687692085	udemy_advanced_cpp.exe	a6dd9a16150f410e
+9	442	7482824248592148	CMakeFiles/udemy_advanced_cpp.dir/main.cpp.obj	2450b4e8d7f98ebe
+443	658	7482824252931027	udemy_advanced_cpp.exe	a6dd9a16150f410e
+8	423	7482824480786378	CMakeFiles/udemy_advanced_cpp.dir/main.cpp.obj	2450b4e8d7f98ebe
+424	621	7482824484958263	udemy_advanced_cpp.exe	a6dd9a16150f410e
+7	435	7482824755907011	CMakeFiles/udemy_advanced_cpp.dir/main.cpp.obj	2450b4e8d7f98ebe
+436	630	7482824760204223	udemy_advanced_cpp.exe	a6dd9a16150f410e
+8	437	7482825140113690	CMakeFiles/udemy_advanced_cpp.dir/main.cpp.obj	2450b4e8d7f98ebe
+438	637	7482825144408711	udemy_advanced_cpp.exe	a6dd9a16150f410e
+7	435	7482826014443183	CMakeFiles/udemy_advanced_cpp.dir/main.cpp.obj	2450b4e8d7f98ebe
+436	631	7482826018737249	udemy_advanced_cpp.exe	a6dd9a16150f410e
