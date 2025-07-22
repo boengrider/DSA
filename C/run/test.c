@@ -21,42 +21,86 @@ typedef struct gll_
     glthread_node_t *head; //1st node
 } gll_t;
 
+void gllListInsertAfter(glthread_node_t *glnode_new, glthread_node_t *glnode_after);
+void gllListInit(gll_t *list, glthread_node_t *head, char *listName, size_t listNameLength);
+void gllListAppend(glthread_node_t *glnode_new, gll_t *list);
 void printEmpDetails(glthread_node_t*);
 
 int main()
 {
     unsigned long glueOffset = offsetof(emp_t, glue);
 
-    emp_t e1 = { "Jon Doe", 1000, "Engineer", 10};
-    emp_t e2 = { "Jane Doe", 2000, "CEO", 1};
+    //Declare 3 emp_t structures
+    emp_t e1 = { "Jon Doe", 1000, "Engineer", 10, { NULL, NULL}};
+    emp_t e2 = { "Jane Doe", 2000, "CEO", 1, {NULL, NULL}};
+    emp_t e3 = { "Michael Scott", 1300, "Regional manager", 2, {NULL, NULL}};
+    //Glued linked list
+    gll_t emps;
+    //Initialize linked list
+    gllListInit(&emps, &e1.glue, "Emploeyees", sizeof("Emploeyees"));
 
-    e1.glue.left = NULL; //NO previous node
-    e1.glue.right = &e2.glue;
-
-    gll_t emps = { "Employees", &e1.glue};
-    
     glthread_node_t *next = emps.head;
 
+
+    printf("Printing employee details from the list '%s'\n", emps.name);
     while(next != NULL)
     {
         printEmpDetails(next);
         next = next->right;
     }
 
+    printf("Adding additional employees to the list '%s'\n", emps.name);
+    gllListAppend(&e2.glue, &emps);
+    gllListAppend(&e3.glue, &emps);
+
+    next = emps.head;
+    printf("Printing employee details from the list '%s'\n", emps.name);
+    while(next != NULL)
+    {
+        printEmpDetails(next);
+        next = next->right;
+    }
     
 
 }
 
-void printEmpDetails(glthread_node_t *glue)
+void gllListInit(gll_t *list, glthread_node_t *head, char *listName, size_t listNameLength)
+{
+    for(int i = 0; i < listNameLength; i++)
+    {
+        list->name[i] = *(listName + i);
+    }
+    list->name[listNameLength] = '\0';
+    list->head = head;
+}
+
+void gllListInsertAfter(glthread_node_t *glnode_new, glthread_node_t *glnode_after)
+{
+    glnode_after->right = glnode_new;
+}
+
+void gllListAppend(glthread_node_t *glnode_new, gll_t *list)
+{
+    glthread_node_t *next = list->head;
+
+    while(next->right != NULL)
+    {
+        next = next->right;
+    }
+
+    next->right = glnode_new;
+}
+
+void printEmpDetails(glthread_node_t *glnode)
 {
     unsigned long nameOff = offsetof(emp_t, name);
     unsigned long salaryOff = offsetof(emp_t, salary);
     unsigned long desigantionOff = offsetof(emp_t, designation);
     unsigned long idOff = offsetof(emp_t, emp_id);
 
-    void *pBase = (void*)glue - sizeof(emp_t) + sizeof(glthread_node_t);
+    void *pBase = (void*)glnode - sizeof(emp_t) + sizeof(glthread_node_t);
 
-    printf("Printing employee details\n");
+   
     printf("ID: %d\nName: %s\nDesignation: %s\nSalary: %lu\n", \
            *((unsigned int*)(pBase + idOff)), (char*)pBase + nameOff, \
            (char*)pBase + desigantionOff, *((unsigned long*)(pBase + salaryOff)));
