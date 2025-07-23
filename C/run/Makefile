@@ -16,14 +16,17 @@ test:
 	@echo $(CWD)
 
 Glthreads:
-	gcc -I/home/coach/GitHub/DSA/C/include /home/coach/GitHub/DSA/C/src/glthread.c -o /home/coach/GitHub/DSA/C/src/glthread.o
-	gcc I/home/coach/GitHub/DSA/C/include test.c -o test.o
-	gcc test.o /home/coach/GitHub/DSA/C/src/glthread.o -o test.out
+	gcc -g -c -I/home/coach/GitHub/DSA/C/include /home/coach/GitHub/DSA/C/src/glthread2.c -o /home/coach/GitHub/DSA/C/src/glthread2.o
+	gcc -g -c -I/home/coach/GitHub/DSA/C/include test.c -o test.o
+	gcc -g test.o /home/coach/GitHub/DSA/C/src/glthread2.o -o test.out
 
 GlthreadsClean:
 	rm -f /home/coach/GitHub/DSA/C/src/glthread.o
+	rm -f /home/coach/GitHub/DSA/C/src/glthread2.o
 	rm -f test.out
 	rm -f test.o
+	rm -f test
+	rm -f Glthreads
 
 
 ArrayADT:
