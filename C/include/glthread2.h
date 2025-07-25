@@ -2,9 +2,9 @@
 //Return codes
 typedef enum GLL_OP_RESULT
 {
-    GLL_OP_RES_REMOVED,
-    GLL_OP_RES_EMPTY,
-    GLL_OP_RES_NOTENLISTED
+    GLL_OP_RES_NODE_REMOVED, //Node removed
+    GLL_OP_RES_LIST_EMPTY,   //List empty
+    GLL_OP_RES_NOT_ENLISTED
     
 } GLL_OP_RES_CODE;
 
@@ -35,7 +35,8 @@ typedef struct gll_
 } gll_t;
 
 void gllListInit(gll_t *_list, glthread_node_t *_head, char *_listName, int _nameLen, comparator _c, unsigned int _glueOffset);
-void gllListInsertNodeAfter(glthread_node_t *_newNode, glthread_node_t *_afterNode, gll_t *_list);
-void gllListAppendNode(glthread_node_t *_newNode, gll_t *_list);
+void gllListInsertNodeAfter(gll_t *_list, glthread_node_t *_newNode, glthread_node_t *_afterNode);
+void gllListAppendNode(gll_t *_list, glthread_node_t *_newNode);
+glthread_node_t* gllListRemoveNode2(glthread_node_t *_node);
 GLL_OP_RES_CODE gllListRemoveNode(gll_t *_list, glthread_node_t *_removedNode, GLL_OPTION_CODE _options);
 
