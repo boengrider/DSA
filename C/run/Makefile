@@ -32,6 +32,9 @@ GlthreadsClean:
 ArrayADT:
 	$(COMPILER) ArrayADT.c ../src/ArrayADT.c -o ArrayADT $(CFLAGS)
 
+ArrayADT-clean:
+	rm -f ArrayADT
+
 #=================
 #GLThreads targets
 #=================
