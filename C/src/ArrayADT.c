@@ -27,7 +27,7 @@ int LinearSearch(struct ArrayADT *arp, int value) {
 *********************************/
 int Get(struct ArrayADT *arp, int index) {
     //out of bounds
-    if(index >= arp->size || index < 0)
+    if(index >= arp->capacity || index < 0)
         return -1;
     
     return  arp->A[index];
@@ -38,23 +38,13 @@ int Get(struct ArrayADT *arp, int index) {
 *********************************/
 int Set(struct ArrayADT* arp, int index, int value) {
      //out of bounds
-    if(index >= arp->size || index < 0)
+    if(index >= arp->capacity || index < 0)
         return -1;
 
     arp->A[index] = value;
-    arp->sorted = UNSORTED;
+    arp->state = UNSORTED;
 
     return index;
-}
-
-/************************************
- Display current contents of an ArrayADT
-************************************/
-void Display(struct ArrayADT *arp) {
-    for(int i = 0; i < arp->length; ++i) {
-        printf("%d ", arp->A[i]);
-    }
-    printf("\n");
 }
 
 
@@ -66,35 +56,46 @@ int Length(struct ArrayADT *arp) {
     return arp->length;
 }
 
+/**************************************
+ Insert new element. If array is sorted
+ Insert will preserve sortedness, 
+ otherwise element is apended at the
+ end of the array
+**************************************/
+int Insert(struct ArrayADT *arp, int value)
+{ 
+   int last = arp->length - 1;
+
+   if(arp->length == arp->capacity)
+   {
+        while(value < arp->A[last])
+        {
+            arp->A[last] = arp->A[last - 1];
+            last--;
+        }
+
+        arp->A[last] = value;
+
+        return last;
+   }
+
+   return 0;
+}
 
 /*************************************
- Insert element at the specified index
- Nicer version
- No appending. Simply insert at the 
- requested index. Only check if it's 
- not beyond the ArrayADT boundaries
- Last element is popped 
+ Insert new element at the specified 
+ index
  *************************************/
-int Insert(struct ArrayADT *arp, int value, int index) {
+int InsertAt(struct ArrayADT *arp, int value, int index) {
    
 
-   //not implemented yet
-   /* switch(params) {
-    case PRESERVE_SORTED:
-
-    case IGNORE_SORTED:
-
-    default:
-   } */
-
-
    //out of bounds
-   if(index >= arp->size || index < 0)
+   if(index >= arp->capacity || index < 0)
         return -1;
 
    //if array is full last element is popped, otherwise we have some 
    //space to the right, so use that index as last
-   int i = (arp->length == arp->size) ? arp->length - 1 : arp->length;
+   int i = (arp->length == arp->capacity) ? arp->length - 1 : arp->length;
 
    while(i > index) {
         arp->A[i] = arp->A[i - 1];
@@ -103,10 +104,10 @@ int Insert(struct ArrayADT *arp, int value, int index) {
 
    arp->A[index] = value;
 
-   if(arp->length < arp->size)
+   if(arp->length < arp->capacity)
     arp->length++;
 
-   arp->sorted = UNSORTED;
+   arp->state = UNSORTED;
    return index;
    
 }
@@ -121,12 +122,12 @@ int Insert(struct ArrayADT *arp, int value, int index) {
  */
 int Swap(struct ArrayADT *arp, int value, int index) {
 
-    if(index >= arp->size || index < 0)
+    if(index >= arp->capacity || index < 0)
         return -1;
 
     arp->A[index] = value;
 
-    arp->sorted = UNSORTED;
+    arp->state = UNSORTED;
 
     return index;
 }
@@ -138,7 +139,7 @@ int Swap(struct ArrayADT *arp, int value, int index) {
  ***************************************/
 int Delete(struct ArrayADT *arp, int index) {
 
-    if(index >= arp->size || index < 0) {
+    if(index >= arp->capacity || index < 0) {
         return -1; //Nothing was deleted
     } else {
         for(int i = index; i < arp->length - 1; i++) {
@@ -243,7 +244,7 @@ int LinearSearchWithShift(struct ArrayADT *arp, int value) {
             arp->A[i] = arp->A[__iPrev];          //shift element closer to the start 
             arp->A[__iPrev] = __tmp;
             
-            arp->sorted = UNSORTED;
+            arp->state = UNSORTED;
             return i;
         }
     }
@@ -260,8 +261,8 @@ int BinarySearch(struct ArrayADT *arp, int value) {
     __low = 0;
     __high = arp->length;
 
-    if(arp->sorted == UNSORTED) {
-        _BubbleSort(arp);
+    if(arp->state == UNSORTED) {
+        BubbleSort(arp);
     }
     
     while(__low <= __high) {
@@ -280,7 +281,7 @@ int BinarySearch(struct ArrayADT *arp, int value) {
     return -1;
 }
 
-void _BubbleSort(struct ArrayADT *arp) {
+void BubbleSort(struct ArrayADT *arp) {
     int swaps;
 
     do
@@ -299,12 +300,9 @@ void _BubbleSort(struct ArrayADT *arp) {
         }
     } while (swaps > 0);
 
-    arp->sorted = SORTED;
+    arp->state = SORTED;
 }
 
-int Merge(struct ArrayADT *arpa, struct ArrayADT *arpb) {
-    
-}
 
 int SortedOrder(struct ArrayADT *arp) {
     
@@ -312,11 +310,11 @@ int SortedOrder(struct ArrayADT *arp) {
     if(arp->length <= 1)
         return ORDER_OTHER;
     //array is unsorted
-    if(arp->sorted == UNSORTED) {
+    if(arp->state == UNSORTED) {
         return ORDER_UNSORTED;
     }
     
-    //array's sorted. Determine order
+    //array's sorted. Determine state
     int i = 0;
     while(i < arp->length - 1) {
         //loop as long as two neighbours are equal
@@ -339,16 +337,27 @@ int SortedOrder(struct ArrayADT *arp) {
     if(arp->A[i] < arp->A[i+1]) 
         return ORDER_ASCENDING;
     
+    return ORDER_OTHER;
 };
 
 double Median(struct ArrayADT *arp) {
 
-    if(arp->length % 2 == 0) {
-        int i = arp->length / 2;
-        return (double)(arp->A[i] + arp->A[i-1]) / 2;
-    } else {
-        return (double)(arp->A[arp->length / 2]);
-    }
+    if(arp->state == UNSORTED)
+        return 0;
+
+    int midPoint = arp->length / 2;
+    //Odd number of elements
+    if(arp->length % 2 ) 
+        return (double)arp->A[midPoint];
+        
+    //Even number of elements
+    return (double)(arp->A[midPoint] + arp->A[midPoint - 1]) / 2;
+    
+}
+
+int Mode(struct ArrayADT *arp)
+{
+
 }
 
 void _QuickSort(struct ArrayADT* arp) {
