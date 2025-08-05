@@ -9,7 +9,10 @@ typedef enum header_ {
     DELETING,
     INSERTING,
     SWAPPING,
-    SETTING
+    SETTING,
+    SEARCHING,
+    UNION,
+    INTERSECTION
 } header_t;
 
 void isSorted(struct ArrayADT*);
@@ -42,40 +45,12 @@ int main() {
     printState(par);
     printContents(par);
 
-    printHeader(REVERSING);
-    Reverse(par);
-    printState(par);
+   
+
+    printHeader(SEARCHING);
+    printf("Index of number 3 is %d\n",BinarySearch(par, 3));
     printContents(par);
 
-    printHeader(REVERSING);
-    Reverse(par);
-    printState(par);
-    printContents(par);
-
-    printHeader(DELETING);
-    Delete(par, 14);
-    printState(par);
-    printContents(par);
-
-    printHeader(INSERTING);
-    InsertAt(par, 3, 14);
-    printState(par);
-    printContents(par);
-
-    printHeader(SORTING);
-    BubbleSort(par);
-    printState(par);
-    printContents(par);
-
-    printHeader(INSERTING);
-    Insert(par, 14);
-    printState(par);
-    printContents(par);
-
-    printHeader(INSERTING);
-    Insert(par, 15);
-    printState(par);
-    printContents(par);
 
 }
 
@@ -168,6 +143,13 @@ void printHeader(header_t header) {
 
         case SETTING:
             printf("\nSetting an element\n");
+            break;
+
+        case SEARCHING:
+            printf("\nSearching for an element\n");
+            break;
+
+        default:
             break;
 
     }

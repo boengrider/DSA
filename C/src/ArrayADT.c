@@ -3,7 +3,13 @@
  ******************************************************/
 #include "ArrayADT.h"
 
-
+/***************************************
+ * Check whether array is sorted.
+ ***************************************/
+ State IsSorted(struct ArrayADT *arp)
+ {
+   //Not Yet Implemented
+ }
 /***************************************
  * Linear search. No shift
 ****************************************/
@@ -257,27 +263,25 @@ int LinearSearchWithShift(struct ArrayADT *arp, int value) {
  * Binary search
  *****************************************/
 int BinarySearch(struct ArrayADT *arp, int value) {
-    int __low,__high;
+    int __low,__mid,__high;
     __low = 0;
     __high = arp->length;
 
-    if(arp->state == UNSORTED) {
-        BubbleSort(arp);
-    }
     
-    while(__low <= __high) {
-        int __mid = (__low + __high) / 2;
-        if(value == arp->A[__mid]) {
+    while(__low <= __high)
+    {
+        __mid = (__low + __high) / 2;
+
+        if(value == arp->A[__mid])
             return __mid;
-        } else if (value < arp->A[__mid])
-        {
+
+        if(value < arp->A[__mid])
             __high = __mid - 1;
-        } else if (value > arp->A[__mid]) {
+
+        if(value > arp->A[__mid])
             __low = __mid + 1;
-        }
     }
 
-    //not found
     return -1;
 }
 

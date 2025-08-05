@@ -25,6 +25,8 @@ typedef enum ArrayADT_Order
 typedef enum ArrayADT_Codes
 {
     ARRAY_FULL,
+    ARRAY_SORTED,
+    ARRAY_UNSORTED,
 } Codes;
 
 //ArrayADT structure
