@@ -12,7 +12,8 @@ typedef enum header_ {
     SETTING,
     SEARCHING,
     UNION,
-    INTERSECTION
+    INTERSECTION,
+    IS_SORTED
 } header_t;
 
 void isSorted(struct ArrayADT*);
@@ -27,29 +28,130 @@ int main() {
 
     
     //Declare and initialize an array of size MAX_SIZE containing LENGTH elements
-    struct ArrayADT ar = {UNSORTED, SIZE, LENGTH, {1,3,5,8,2,9,4,7,6,10}};
+    struct ArrayADT ar = {UNSORTED, SIZE, LENGTH, {1,2}};
+    struct ArrayADT ara = { UNSORTED, 10, 1, {1}};
+    struct ArrayADT arb = { UNSORTED, 10, 2, {3,3}};
+    struct ArrayADT arc = { UNSORTED, 10, 3, {3,3, 3}};
+
 
     //Declare and initialize pointer to ArrayADT struct
     struct ArrayADT *par = &ar;
+    struct ArrayADT *para = &ara;
+    struct ArrayADT *parb = &arb;
+    struct ArrayADT *parc = &arc;
+
+
+   printHeader(IS_SORTED);
+   printContents(par);
+   
+   Code isSorted = IsSorted(par);
+
+   switch (isSorted) {
+   
+        case ARRAY_SINGLE_ELEMENT:
+            printf("Array is sorted and continas only one element\n");
+            break;
+
+        case ARRAY_TWO_ELEMENTS:
+            printf("Array is sorted and contains only two elements\n");
+            break;
+
+        case ARRAY_SAME_ELEMENTS:
+            printf("Array is sorted composed of the same elements\n");
+            break;
+
+        case OTHER:
+            printf("Not yet implemented\n");
+            break;
+
+        default:
+            break;
+   }
+
+
+   printHeader(IS_SORTED);
+   printContents(para);
+   
+   isSorted = IsSorted(para);
+
+   switch (isSorted) {
+   
+        case ARRAY_SINGLE_ELEMENT:
+            printf("Array is sorted and continas only one element\n");
+            break;
+
+        case ARRAY_TWO_ELEMENTS:
+            printf("Array is sorted and contains only two elements\n");
+            break;
+
+        case ARRAY_SAME_ELEMENTS:
+            printf("Array is sorted composed of the same elements\n");
+            break;
+
+        case OTHER:
+            printf("Not yet implemented\n");
+            break;
+
+        default:
+            break;
+   }
+
+   printHeader(IS_SORTED);
+   printContents(parb);
+   
+   isSorted = IsSorted(parb);
+
+   switch (isSorted) {
+   
+        case ARRAY_SINGLE_ELEMENT:
+            printf("Array is sorted and continas only one element\n");
+            break;
+
+        case ARRAY_TWO_ELEMENTS:
+            printf("Array is sorted and contains only two elements\n");
+            break;
+
+        case ARRAY_SAME_ELEMENTS:
+            printf("Array is sorted composed of the same elements\n");
+            break;
+
+        case OTHER:
+            printf("Not yet implemented\n");
+            break;
+
+        default:
+            break;
+   }
+
+   printHeader(IS_SORTED);
+   printContents(parc);
+   
+   isSorted = IsSorted(parc);
+
+   switch (isSorted) {
+   
+        case ARRAY_SINGLE_ELEMENT:
+            printf("Array is sorted and continas only one element\n");
+            break;
+
+        case ARRAY_TWO_ELEMENTS:
+            printf("Array is sorted and contains only two elements\n");
+            break;
+
+        case ARRAY_SAME_ELEMENTS:
+            printf("Array is sorted composed of the same elements\n");
+            break;
+
+        case OTHER:
+            printf("Not yet implemented\n");
+            break;
+
+        default:
+            break;
+   }
    
 
-    for(int i = 11; i <= 16; i++) {
-        printState(par);
-        printHeader(INSERTING);
-        if(InsertAt(par, i, par->length) < 0)
-            printf("\nArray is full. %d is not stored\n", i);
-    }
-
-    printHeader(SORTING);
-    BubbleSort(par);
-    printState(par);
-    printContents(par);
-
-   
-
-    printHeader(SEARCHING);
-    printf("Index of number 3 is %d\n",BinarySearch(par, 3));
-    printContents(par);
+  
 
 
 }
@@ -147,6 +249,10 @@ void printHeader(header_t header) {
 
         case SEARCHING:
             printf("\nSearching for an element\n");
+            break;
+
+        case IS_SORTED:
+            printf("\nIs sorted ?\n");
             break;
 
         default:

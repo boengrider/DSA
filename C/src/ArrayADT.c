@@ -6,9 +6,33 @@
 /***************************************
  * Check whether array is sorted.
  ***************************************/
- State IsSorted(struct ArrayADT *arp)
+ Code IsSorted(struct ArrayADT *arp)
  {
-   //Not Yet Implemented
+
+    //If there are only two elements, array is sorted
+    //since we don't care about the sorting order
+    //Same applies if there's single element.
+    if(arp->length <= 2)
+        return ARRAY_SINGLE_ELEMENT | ARRAY_TWO_ELEMENTS; // 1 or 2 elements e.g [1] or [1,3] or [3,1] or [3,3]
+
+    
+    int left,right;
+    left = 0;
+    right = 1;
+
+    //Identify dissimilar entries
+    while(left == right)
+    {
+       left++;
+       right++;
+
+       if(right >= arp->length)
+            return ARRAY_SAME_ELEMENTS; // Array contains same elements e.g [3,3,3,3]
+    }
+
+
+    
+    return OTHER;
  }
 /***************************************
  * Linear search. No shift

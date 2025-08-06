@@ -27,7 +27,11 @@ typedef enum ArrayADT_Codes
     ARRAY_FULL,
     ARRAY_SORTED,
     ARRAY_UNSORTED,
-} Codes;
+    ARRAY_TWO_ELEMENTS,
+    ARRAY_SINGLE_ELEMENT,
+    ARRAY_SAME_ELEMENTS,
+    OTHER
+} Code;
 
 //ArrayADT structure
 struct ArrayADT
@@ -58,3 +62,4 @@ extern int SortedOrder(struct ArrayADT*);
 extern double Median(struct ArrayADT*);
 extern int Mode(struct ArrayADT*);
 extern void _QuickSort(struct ArrayADT*);
+extern Code IsSorted(struct ArrayADT*);
