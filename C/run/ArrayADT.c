@@ -28,18 +28,23 @@ int main() {
 
     
     //Declare and initialize an array of size MAX_SIZE containing LENGTH elements
+    struct ArrayADT arh = {UNSORTED, SIZE, 1, {1}};  
+    struct ArrayADT arg = {UNSORTED, SIZE, 2, {2,2}};   
+    struct ArrayADT arf = {UNSORTED, SIZE, 2, {1,2}};   
     struct ArrayADT are = {UNSORTED, SIZE, SIZE, {1,2,3,4,5}};   
     struct ArrayADT ard = {UNSORTED, SIZE, SIZE, {1,2,3,5,4}};   
     struct ArrayADT arc = {UNSORTED, SIZE, SIZE, {1,1,1,1,1}};   
     struct ArrayADT arb = {UNSORTED, SIZE, SIZE, {1,2,3,4,4}};   
-    struct ArrayADT ara = {UNSORTED, SIZE, SIZE, {1,1,1,2,2}};   
-    
-    
-   struct ArrayADT *arrays[] = { &ara, &arb, &arc, &ard, &are};
-   struct ArrayADT *p = arrays[0];
+    struct ArrayADT ara = {UNSORTED, SIZE, SIZE, {1,1,1,2,2}};
 
-   for(int i = 0; i < 5; i++)
+    
+    
+   struct ArrayADT *arrays[] = { &ara, &arb, &arc, &ard, &are, &arf, &arg, &arh};
+   
+
+   for(int i = 0; i < 8; i++)
    {
+        struct ArrayADT *p = arrays[i];
         isSorted(p);
         printContents(p);
         p++;
