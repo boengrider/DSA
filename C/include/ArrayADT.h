@@ -2,7 +2,7 @@
  * ArrayADT abstract data type
  *Supports basic methods such as Display, Search, Sort etc
  ************************************************************/
-#define SIZE 15
+#define SIZE 5
 #define INSERT_NICE
 #define LINEAR_SEARCH
 #define LINEAR_SEARCH_WITH_SHIFT

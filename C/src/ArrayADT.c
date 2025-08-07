@@ -2,34 +2,64 @@
  * ArrayADT functionality implementation
  ******************************************************/
 #include "ArrayADT.h"
+#include <stdio.h>
 
 /***************************************
  * Check whether array is sorted.
  ***************************************/
  Code IsSorted(struct ArrayADT *arp)
  {
-
-    //If there are only two elements, array is sorted
-    //since we don't care about the sorting order
-    //Same applies if there's single element.
-    if(arp->length <= 2)
-        return ARRAY_SINGLE_ELEMENT | ARRAY_TWO_ELEMENTS; // 1 or 2 elements e.g [1] or [1,3] or [3,1] or [3,3]
-
-    
     int left,right;
+    
+    //One or two elements. Array is sorted
+    if(arp->length <= 2)
+        return ARRAY_SORTED;
+
+    //Unsorted
     left = 0;
     right = 1;
-
+  
     //Identify dissimilar entries
-    while(left == right)
-    {
+    while(arp->A[left] == arp->A[right]) {
+    
        left++;
        right++;
 
        if(right >= arp->length)
-            return ARRAY_SAME_ELEMENTS; // Array contains same elements e.g [3,3,3,3]
+            return ARRAY_SORTED; // Array contains same elements e.g [3,3,3,3]
     }
 
+    //Ascending order
+    if(arp->A[left] < arp->A[right])
+    {
+        
+        while(arp->A[left] <= arp->A[right])
+        {
+            left++;
+            right++;
+
+            if(right >= arp->length)
+                return ARRAY_SORTED;
+        }
+
+        return ARRAY_UNSORTED;
+    }
+
+    //Descending order
+    if(arp->A[left] > arp->A[right])
+    {
+      
+        while(arp->A[left] >= arp->A[right])
+        {
+            left++;
+            right++;
+
+            if(right >= arp->length)
+                return ARRAY_SORTED;
+        }
+
+        return ARRAY_UNSORTED;
+    }
 
     
     return OTHER;
