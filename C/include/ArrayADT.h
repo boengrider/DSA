@@ -24,7 +24,6 @@ typedef enum ArrayADT_Order
 
 typedef enum ArrayADT_Codes
 {
-<<<<<<< Updated upstream
     ARRAY_FULL,
     ARRAY_SORTED,
     ARRAY_UNSORTED,
@@ -33,11 +32,6 @@ typedef enum ArrayADT_Codes
     ARRAY_SAME_ELEMENTS,
     OTHER
 } Code;
-=======
-    ARRAY_FULL
-    
-} Codes;
->>>>>>> Stashed changes
 
 //ArrayADT structure
 struct ArrayADT
