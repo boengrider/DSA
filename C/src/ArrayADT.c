@@ -2,7 +2,6 @@
  * ArrayADT functionality implementation
  ******************************************************/
 #include "ArrayADT.h"
-#include <stdio.h>
 
 /***************************************
  * Check whether array is sorted.
