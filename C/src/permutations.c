@@ -1,3 +1,4 @@
+//String permutations using recursion
 #include <stdio.h>
 #include <string.h>
 
@@ -16,19 +17,17 @@ int factorial(int n);
 int main()
 {
 
-    static char string[] = { "ABC" };
-    
+    char string[] = { "ABC" };
+    permutation(string,0);
    
+
     /**
     translate(string, LOWER);
     permutation(string, 0);
     **/
 
 
-    printf("%d\n",factorial(5));
-    printf("%d\n",factorial(6));
-    printf("%d\n",factorial(7));
-
+   
    
 
     return 0;
@@ -38,11 +37,29 @@ int main()
 
 void permutation(char *string, int key)
 {
-    while(key != strlen(string))
+
+    char *__string = string;
+    static char result[10];
+    static char is_taken[10];
+
+    for(int i = 0;; i++)
     {
-        return permutation(string, ++key);
-        printf("Letter %c\n", string[key]);
+        if(string[i] != '\0') 
+        {
+            printf("Current char is %c\n", string[i]);
+            if(is_taken[i] == 0)
+            {        
+                printf("Character is not taken. Copying to result[]\n");
+                result[i] = string[i];
+            } 
+        } else 
+        {
+            printf("Possible permutation of ABC: %s\n", result);
+            break;
+        }
+        //permutation(__string, key - 1);
     }
+
 
     
 }
