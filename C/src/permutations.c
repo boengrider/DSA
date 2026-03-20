@@ -40,26 +40,22 @@ void permutation(char *string, int key)
 
     char *__string = string;
     static char result[10];
-    static char is_taken[10];
+    static char is_letter_available[10];
 
-    for(int i = 0;; i++)
+    //Start with key 0, first character (A)
+    for(int i = key;; i++)
     {
-        if(string[i] != '\0') 
+        if(is_letter_available[i])
         {
-            printf("Current char is %c\n", string[i]);
-            if(is_taken[i] == 0)
-            {        
-                printf("Character is not taken. Copying to result[]\n");
-                result[i] = string[i];
-            } 
-        } else 
-        {
-            printf("Possible permutation of ABC: %s\n", result);
-            break;
+            //Copy available letter to the result array
+            result[i] = string[i];
         }
-        //permutation(__string, key - 1);
+
+        if(string[i] == '\0')
+            break;
     }
 
+    printf("%s\n", result);
 
     
 }
