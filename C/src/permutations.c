@@ -42,25 +42,7 @@ void permutation(char *string, int key)
     static char result[10];
     static char taken[10];
 
-    //Start with key 0, first character (A)
-    for(int i = key;; i++)
-    {
-        if(!taken[i])
-        {
-            //Copy available letter to the result array
-            result[i] = string[i];
-            permutation(string, key + 1);
-        }
-
-        if(string[i] == '\0')
-            break;
-    }
-
-
-    printf("%s\n", result);
-    permutation(string, 1);
     
-
     
 }
 
